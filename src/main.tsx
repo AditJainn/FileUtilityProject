@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')!).render(
 
     <MantineProvider>
       <App/>
-      <DropzoneButton />
+      {/* <DropzoneButton /> */}
     </MantineProvider>
 
   </StrictMode>

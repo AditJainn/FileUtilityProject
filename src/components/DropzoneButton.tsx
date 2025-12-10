@@ -4,69 +4,25 @@ import { IconCloudUpload, IconDownload, IconX } from '@tabler/icons-react';
 import { Button, Group, Text, useMantineTheme } from '@mantine/core';
 import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
 import classes from './DropzoneButton.module.css';
-import { FileUploadItem } from './FileUploadItem';
+// import { FileUploadItem } from './FileUploadItem';
 
 
-type UploadFile = {
-  file: File;
-  status: 'pending' | 'uploading' | 'complete' | 'error';
-  progress: number;
+interface DropzoneButtonProps {
+  onFilesAdded?: (files: File[]) => void;
+}
 
-};
-export function DropzoneButton() {
+export function DropzoneButton({ onFilesAdded }: DropzoneButtonProps) {
   const theme = useMantineTheme();
   const openRef = useRef<() => void>(null);
   const acceptedFiles = ".jpg / jpeg /  png";
-  const [uploads, setUploads] = useState<UploadFile[]>([]);
-
-  const startFakeUpload = (index: number) => {
-    setUploads((prev) =>
-      prev.map((item, i) =>
-        i === index ? { ...item, status: 'uploading' } : item
-      )
-    );
-    let progress = 0;
-
-    const interval = setInterval(() => {
-      progress += 10;
-
-      setUploads((prev) =>
-        prev.map((item, i) =>
-          i === index ? { ...item, progress } : item
-        )
-      );
-
-      if (progress >= 100) {
-        clearInterval(interval);
-        setUploads((prev) =>
-          prev.map((item, i) =>
-            i === index
-              ? { ...item, status: 'complete', progress: 100 }
-              : item
-          )
-        );
-      }
-    }, 300);
-  }
-
   return (
     <div className={classes.wrapper}>
       <Dropzone
         openRef={openRef}
-        onDrop={(acceptedFiles) => {
-          const newUploads = acceptedFiles.map((file) => ({
-            file,
-            status: 'pending' as const,
-            progress: 0,
-          }));
-
-          setUploads((prev) => [...prev, ...newUploads]);
-          newUploads.forEach((_, i) =>
-            startFakeUpload(uploads.length + i)
-          );
-          console.log('Accepted files:', acceptedFiles);
+        onDrop={(files) => {
+          console.log('Files Uploaded', files);
+          onFilesAdded?.(files);
         }}
-
         className={classes.dropzone}
         radius="md"
         accept={[MIME_TYPES.png, MIME_TYPES.jpeg]}
@@ -88,7 +44,7 @@ export function DropzoneButton() {
           <Text ta="center" fw={700} fz="lg" mt="xl">
             <Dropzone.Accept>Drop files here</Dropzone.Accept>
             <Dropzone.Reject> {acceptedFiles} file less than 30mb</Dropzone.Reject>
-            <Dropzone.Idle>Upload resume</Dropzone.Idle>
+            <Dropzone.Idle>Upload Files</Dropzone.Idle>
           </Text>
 
           <Text className={classes.description}>
@@ -101,16 +57,6 @@ export function DropzoneButton() {
       <Button className={classes.control} size="md" radius="xl" onClick={() => openRef.current?.()}>
         Select files
       </Button>
-      <div>
-        {uploads.map((upload, index) => (
-          <FileUploadItem
-            key={upload.file.name + index}
-            file={upload.file}
-            status={upload.status}
-            progress={upload.progress}
-          />
-        ))}
-      </div>
     </div>
 
   );
