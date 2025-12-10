@@ -1,0 +1,35 @@
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #444;
+  border-bottom: 2px solid black;  /* only bottom border */
+  padding-bottom: 10px;            /* space inside the border */
+  margin-bottom: 20px;              /* space between header and next component */     
+}
+
+.header-left img {
+  height: 80px;
+  width: auto;  /* keeps aspect ratio */
+}
+
+.title-stack {
+  display: flex;
+  flex-direction: column;
+  line-height: .3;
+} 
+/* 
+.subtitle {
+  font-size: 0.85rem;
+  color: gray;
+  margin-top: -4px;
+} */
+
+.subtitle {
+  font-size: 0.85rem;
+  color: gray;
+  margin-left: 10%;   /* ✅ pushes subtitle slightly right */
+  margin-top: -4px;
+  text-align: left;
+}
