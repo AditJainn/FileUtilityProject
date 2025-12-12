@@ -3,7 +3,6 @@ import Header from './components/Header/Header';
 import { DropzoneButton } from './components/DropzoneButton';
 import { FileUploadItem } from './components/FileUploadItem';
 import { useState } from 'react';
-
 function App() {
   const [files, setFiles] = useState<File[]>([]);
 
@@ -14,7 +13,6 @@ function App() {
   return (
     <div className="App">
       <Header />
-
       <div style={{ marginTop: 20 }}>
         <DropzoneButton onFilesAdded={handleFilesAdded} />
 
@@ -25,6 +23,7 @@ function App() {
                 key={`${file.name}-${index}`}
                 file={file}
                 onBlankPage={false}
+                onRemove={() => setFiles(prev => prev.filter((_, i) => i !== index))}
               />
             ))}
           </div>

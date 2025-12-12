@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { Text, Button, Progress, Group } from '@mantine/core';
-import './fileUpload.css'; // Assuming this is present
 
 export type UploadStatus = 'pending' | 'uploading' | 'complete' | 'error';
 
 interface FileUploadItemProps {
   file: File;
   onBlankPage?: boolean;
+  onRemove:() => void;
 }
 type SetProgress = React.Dispatch<React.SetStateAction<number>>;
-type SetStatus = React.Dispatch<React.SetStateAction<UploadStatus>>;
 
 function runSimulation(setProgress: SetProgress): Promise<void> {
   return new Promise((resolve) => {
@@ -23,11 +22,11 @@ function runSimulation(setProgress: SetProgress): Promise<void> {
         }
         return p + 10;
       });
-    }, 50); // Set speed here (e.g., update every 100ms)
+    }, 50); 
   });
 }
 
-export function FileUploadItem({ file, onBlankPage = false }: FileUploadItemProps) {
+export function FileUploadItem({ file, onBlankPage = false, onRemove }: FileUploadItemProps) {
   const [status, setStatus] = useState<UploadStatus>('pending');
   const [progress, setProgress] = useState(0);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
@@ -76,18 +75,18 @@ export function FileUploadItem({ file, onBlankPage = false }: FileUploadItemProp
     if (!downloadUrl) return;
     const a = document.createElement('a');
     a.href = downloadUrl;
-    a.download = file.name.replace(/\.[^/.]+$/, '') + '.pdf';
+    a.download = file.name.replace(/\.[^/.]+$/, '') + '.pdf'; 
     a.click();
   };
 
   const handleCancel = () => {
-    if (status === 'uploading') return; 
     setStatus('pending');
     setProgress(0);
     if (downloadUrl) {
       window.URL.revokeObjectURL(downloadUrl);
       setDownloadUrl(null);
     }
+    onRemove();
   };
 
   return (

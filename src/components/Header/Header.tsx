@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../assets/KiwiCloud2.png';
+import logo from '../../assets/Kiwi Cloud.png';
 import './Header.css';
 
 function Header(){
