@@ -6,9 +6,12 @@
   justify-content: center;
 } */
 
+.left-align {
+    text-align: left;
+}
 /* or max-width: 400px; min-width: 200px; */
-.file-upload-form {
-  /* width: 50%;  */
+/* .file-upload-form { */
+  /* width: 50%;  
   max-width: 400px;
   min-width: 200px;
   display: flex;
@@ -48,3 +51,4 @@
 .browse-button:hover {
   background-color: rgb(14, 14, 14);
 }
+*/
