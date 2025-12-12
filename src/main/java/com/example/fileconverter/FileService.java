@@ -24,7 +24,7 @@ public class FileService {
     // }
 
     private void writeToPage(PDImageXObject pdImage,
-            PDDocument document, boolean onBlankPage) throws Exception {
+        PDDocument document, boolean onBlankPage) throws Exception {
         float imgWidth = pdImage.getWidth();
         float imgHeight = pdImage.getHeight();
         if (!onBlankPage) { // just convert the image to pdf without putting it on a new page

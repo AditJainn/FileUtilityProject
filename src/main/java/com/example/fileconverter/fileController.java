@@ -5,6 +5,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class fileController {
 
@@ -47,6 +48,8 @@ public class fileController {
             headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"converted.pdf\"");
 
             // Send back as response
+            // Thread.sleep(5000); // Simulate delay for testing
+            System.out.println("File converted successfully, sending response.");
             return ResponseEntity
                     .ok()
                     .headers(headers)
