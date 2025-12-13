@@ -25,7 +25,11 @@ public class fileController {
 
     // for now this will just be for single pdf's ,
     // later we will use different end points for multiple files to maintain clarity
-    @PostMapping("/upload")
+   @PostMapping(
+    value = "/upload",
+    consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+    produces = MediaType.APPLICATION_PDF_VALUE
+    )
     public ResponseEntity<byte[]> uploadFile(@RequestParam("file") MultipartFile file,
             @RequestParam("onBlankPage") Boolean onBlankPage) {
         try {
@@ -48,7 +52,7 @@ public class fileController {
             headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"converted.pdf\"");
 
             // Send back as response
-            // Thread.sleep(5000); // Simulate delay for testing
+            Thread.sleep(5000); // Simulate delay for testing
             System.out.println("File converted successfully, sending response.");
             return ResponseEntity
                     .ok()
