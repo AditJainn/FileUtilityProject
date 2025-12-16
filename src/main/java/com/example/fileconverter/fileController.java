@@ -52,7 +52,7 @@ public class fileController {
             headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"converted.pdf\"");
 
             // Send back as response
-            Thread.sleep(5000); // Simulate delay for testing
+            // Thread.sleep(5000); // Simulate delay for testing
             System.out.println("File converted successfully, sending response.");
             return ResponseEntity
                     .ok()
