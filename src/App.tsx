@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './components/Header/Header';
-import { DropzoneButton } from './components/DropzoneButton';
-import { FileUploadItem } from './components/FileUploadItem';
+import { DropzoneButton } from './components/Header/DropzoneButton';
+import { FileUploadItem } from './components/Header/FileUploadItem';
 import { useState } from 'react';
 function App() {
   const [files, setFiles] = useState<File[]>([]);
