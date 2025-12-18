@@ -39,7 +39,7 @@ export function FileUploadItem({ file, onBlankPage = false, onRemove }: FileUplo
     formData.append('file', file);
     formData.append('onBlankPage', String(onBlankPage));
         
-    const fetchPromise = fetch('http://localhost:8080/upload', {
+    const fetchPromise = fetch('/api/upload', {
       method: 'POST',
       body: formData,
     }).then(response => {
