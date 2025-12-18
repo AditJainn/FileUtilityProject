@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  fup-backend:
+    image: fup-backend
+    build:
+      context: ./backend
+    container_name: fup-backend
+    restart: always
+    ports:
+      - "8001:8080"  # expose backend to host for Nginx
+    networks:
+      - fup-network
+
+  fup-frontend:
+    image: fup-frontend
+    build:
+      context: ./frontend
+    container_name: fup-frontend
+    restart: always
+    ports:
+      - "8002:80"    # expose frontend to host for Nginx
+    networks:
+      - fup-network
+
+# for future config 
+networks:
+  fup-network:
+    driver: bridge

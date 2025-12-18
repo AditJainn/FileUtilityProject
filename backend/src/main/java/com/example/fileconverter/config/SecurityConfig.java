@@ -18,7 +18,7 @@ public class SecurityConfig {
             
             // Allow all requests to pass through (including /upload and /hello)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/**").permitAll() 
+                .requestMatchers("/upload", "/hello").permitAll()
                 .anyRequest().authenticated()
             );
             

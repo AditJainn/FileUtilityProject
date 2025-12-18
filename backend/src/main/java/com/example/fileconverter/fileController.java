@@ -1,11 +1,18 @@
 package com.example.fileconverter;
 
+import java.net.http.HttpHeaders;
 import java.nio.charset.StandardCharsets;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@CrossOrigin(origins = "http://localhost:5173")
+// TODO : Create Dev and prod profiles 
+@CrossOrigin(origins = {
+    "http://localhost:5173",   // dev server
+    "http://fup-frontend:80",   // frontend container in Compose
+    "https://fup.kiwicloud.ca"
+})
+
 
 @RestController
 public class fileController {
